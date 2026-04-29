@@ -10,7 +10,7 @@ MVP edge-assistive vision pipeline that detects objects, tracks them frame-to-fr
 4. FastAPI endpoint for frame inference simulation and integration testing.
 5. Unit tests for tracking continuity and guidance generation.
 
-## Run
+## Quick Start
 
 ```bash
 python -m venv .venv
@@ -34,7 +34,7 @@ ASSISTIVE_RATE_LIMIT_PER_MINUTE=600
 
 Inference requests are rate-limited per client with in-memory throttling.
 
-## Validation
+## Testing
 
 ```bash
 pytest -q
@@ -69,7 +69,7 @@ This MVP uses deterministic detector inputs for portability. Replace `MockYoloV3
 2. Rate limiting is per-instance and not shared across replicas.
 3. Inference endpoint auth is shared-secret based (no role-based access model).
 
-## Next Roadmap
+## Roadmap
 
 1. Integrate real-time camera ingestion with optimized edge inference backend.
 2. Add streaming endpoint support for continuous frame processing.
