@@ -12,6 +12,15 @@ pip install -r requirements.txt
 uvicorn api.main:app --host 0.0.0.0 --port 8011
 ```
 
+Probe checks:
+
+```bash
+curl http://127.0.0.1:8011/health
+curl http://127.0.0.1:8011/ready
+curl http://127.0.0.1:8011/healthz
+curl http://127.0.0.1:8011/readyz
+```
+
 ## Environment Variables
 
 1. `ASSISTIVE_API_KEY` (optional; enables API key auth on `/infer-frame`)

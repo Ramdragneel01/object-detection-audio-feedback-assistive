@@ -2,6 +2,13 @@
 
 Base URL defaults to `http://127.0.0.1:8011`.
 
+## Health and Readiness
+
+1. `GET /health`
+2. `GET /ready`
+3. `GET /healthz` (alias for `/health`)
+4. `GET /readyz` (alias for `/ready`)
+
 ## Authentication
 
 `POST /infer-frame` requires `X-API-Key` only when `ASSISTIVE_API_KEY` is configured.
@@ -62,6 +69,29 @@ Response:
 
 Possible errors:
 
-1. `401 Unauthorized` when API key is configured and missing or invalid.
-2. `429 Too Many Requests` when inference request rate exceeds configured limit.
-3. `422 Unprocessable Entity` for invalid payload shape.
+All API errors return a normalized payload:
+
+```json
+{
+  "error": {
+    "code": "string",
+    "message": "string",
+    "request_id": "string",
+    "details": []
+  }
+}
+```
+
+Common error codes:
+
+1. `unauthorized`
+2. `validation_error`
+3. `rate_limited`
+4. `internal_error`
+
+Common error statuses:
+
+1. `401 Unauthorized` when API key is configured and missing or invalid (`api_key_invalid`).
+2. `429 Too Many Requests` when inference request rate exceeds configured limit (`rate_limited`).
+3. `429` responses include `Retry-After: 60`.
+4. `422 Unprocessable Entity` for invalid payload shape (`request_validation_failed`).
